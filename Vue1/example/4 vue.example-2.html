@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>example mount.html</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>example mount</h1>
+    <hr>
+    <div id="app">
+        {{message}}
+    </div>
+    <p><button onclick="destroy()">销毁</button></p>
+    <p><button onclick="reload()">刷新</button></p>
+    <p><button onclick="tick()">数据修改了</button></p>
+    <script type="text/javascript">
+        var hello = Vue.extend({
+            template:`<p>{{message}}</p>`,
+            data:function(){
+                return {
+                    message:'hello World'
+                }
+            },
+            mounted:function(){
+                console.log("mounted被创建")
+            },
+            updated:function(){
+                console.log("updated更新了")
+            },
+            destroyed:function(){
+                console.log("destroy销毁了")
+            }
+        })
+        var vm = new hello().$mount("#app")
+        function destroy(){
+            vm.$destroy()
+        }
+        function reload(){
+            vm.$forceUpdate()
+        }
+        function tick(){
+            vm.message="update message info ";
+            vm.$nextTick(function(){
+                console.log('message更新完后我被调用了');
+            })
+        }
+    </script>
+</body>
+</html>

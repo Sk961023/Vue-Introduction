@@ -20,8 +20,8 @@
         <div :class="isOk?classA12:classB12">4、绑定class中的三元运算符</div>
         <hr>
         <div>
-            <input type="checkbox" id="isOk" v-model="isOk">
-            <lebel for="isOk">isOk={{isOk}}</lebel>
+            <input type="checkbox" v-model="isOk">
+            <lebel>isOk={{isOk}}</lebel>
         </div>
         <hr>
         <div v-bind:style="{color:red,fontSize:font}">5绑定style的值</div>

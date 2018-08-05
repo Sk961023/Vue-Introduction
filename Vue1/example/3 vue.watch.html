@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3 vue.watch.html</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>watch</h1>
+    <hr>
+    <div id="app">
+        <p>今日温度：{{wendu }}</p>
+        <p>穿衣建议：{{chuanyi}}</p>
+        <p><button @click='Add'>升高温度</button></p>
+        <p><button @click='jian'>降低温度</button></p>
+    </div>
+    <script type="text/javascript">
+        var chuanyiArr = ['T恤','夹克长裙','羽绒服']
+        var app = new Vue({
+            el:'#app',
+            data:{
+                wendu:14,
+                chuanyi:'夹克长裙'
+            },
+            methods:{
+                Add:function(){
+                    this.wendu+=5
+                },
+                jian:function(){
+                    this.wendu-=5
+                }
+            },
+            // watch:{
+            //     wendu:function(news,olds){
+            //         if(news>=26){
+            //             this.chuanyi=chuanyiArr[0]
+            //         }else if(news<26 && news>0){
+            //                 this.chuanyi=chuanyiArr[1]
+            //         }else{
+            //             this.chuanyi=chuanyiArr[2]
+            //         }
+            //     }
+            // }
+        })
+        app.$watch('wendu',function(news,olds){
+            if(news>=26){
+                this.chuanyi=chuanyiArr[0]
+            }else if(news<26 && news>0){
+                    this.chuanyi=chuanyiArr[1]
+            }else{
+                this.chuanyi=chuanyiArr[2]
+            }
+        })
+    </script>
+</body>
+</html>
