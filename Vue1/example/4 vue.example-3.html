@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4 vue.example-3.html</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>4 vue.example-3</h1>
+    <hr>
+    <div id="app">
+        {{num}}
+        <p><button @click="add">Add</button></p>
+        
+    </div>
+    <button onclick="reduce()">reduce</button>
+    <p></p>
+    <button onclick="reduceOne()">reduceOne</button>
+    <p></p>
+    <button onclick="off()">off</button>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:'#app',
+            data:{
+                num:1
+            },
+            methods:{
+                add:function(){
+                    this.num++
+                }
+            }
+        })
+        app.$on("reduce",function(){
+            console.log("执行了 构造器外部方法")
+            this.num--
+                // 可以执行多次
+        })
+        app.$once("reduceOne",function(){
+            console.log("执行了 构造器外部方法")
+            this.num--
+            // 只执行一次
+        })
+        function reduceOne(){
+            app.$emit('reduceOne')
+        }
+        function reduce(){
+            app.$emit('reduce')
+        }
+
+        function off(){
+            app.$off('reduce')
+            //关闭事件
+        }
+    </script>
+</body>
+</html>

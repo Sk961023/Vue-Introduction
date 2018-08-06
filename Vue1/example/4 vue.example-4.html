@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>example slot.html</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>example slot</h1>
+    <hr>
+    <div id="app">
+        <hello>
+            <span slot="helloUrl">{{helloData.helloUrl}}</span>
+            <span slot="helloName">{{helloData.helloName}}</span>
+            <span slot="skill">{{helloData.skill}}</span>
+        </hello>
+    </div>
+    <template id="tep">
+        <div>
+            <p>地址:<slot name="helloUrl"></slot></p>
+            <p>网名:<slot name="helloName"></slot></p>
+            <p>签名:<slot name="skill"></slot></p>
+        </div>
+       
+    </template>
+    <script type="text/javascript">
+        var hello = {
+            template:'#tep'
+        }
+        var app = new Vue({
+            el:'#app',
+            data:{
+                helloData:{
+                    helloUrl:'http://www.baidu.com',
+                    helloName:'hello',
+                    skill:'world'
+                }
+            },
+            components:{
+                'hello':hello
+            }
+        })
+    </script>
+</body>
+</html>
